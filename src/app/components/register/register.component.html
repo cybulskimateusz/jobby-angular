@@ -1,0 +1,5 @@
+<div>
+  <input #emailAdress />
+  <input #password />
+  <button (click)="authService.signUp(emailAdress.value, password.value)">Sign Up</button>
+</div>

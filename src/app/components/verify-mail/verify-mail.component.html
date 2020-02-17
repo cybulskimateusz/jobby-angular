@@ -1,0 +1,10 @@
+<div *ngIf="authService.userData as user">
+  <p>We have sent a confirmation email to <strong>{{user.email}}</strong>.</p>
+  <p>Please check your email and click on the link to verfiy your email address.</p>
+</div>
+
+<div>
+  <button type="button" (click)="authService.sendVerificationMail()">
+    Resend Verification Email
+  </button>
+</div>

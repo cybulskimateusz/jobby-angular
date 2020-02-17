@@ -1,0 +1,7 @@
+<div>
+  <input #emailAdress />
+  <input #password />
+  <button (click)="authService.signIn(emailAdress.value, password.value)">Sign In</button>
+  <button (click)="authService.googleAuth()"> Login with Google</button>
+  <button (click)="authService.facebookAuth()"> Login with Facebook</button>
+</div>

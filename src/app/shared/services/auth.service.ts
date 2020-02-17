@@ -29,7 +29,7 @@ export class AuthService {
     });
   }
 
-  async signIn(email: string, password: string) {
+  signIn(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
@@ -41,7 +41,7 @@ export class AuthService {
       });
   }
 
-  async signUp(email: string, password: string) {
+  signUp(email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.sendVerificationMail();
@@ -54,11 +54,11 @@ export class AuthService {
   async sendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification()
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        this.router.navigate(['verify-mail']);
       });
   }
 
-  async forgotPassword(passwordResetEmail: any) {
+  forgotPassword(passwordResetEmail: any) {
     return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
@@ -80,7 +80,7 @@ export class AuthService {
     return this.authLogin(new auth.FacebookAuthProvider());
   }
 
-  async authLogin(provider: auth.AuthProvider) {
+  authLogin(provider: auth.AuthProvider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((result) => {
         this.ngZone.run(() => {
@@ -106,10 +106,10 @@ export class AuthService {
     });
   }
 
-  async signOut() {
+  signOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['login']);
     });
   }
 
