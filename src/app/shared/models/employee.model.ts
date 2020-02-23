@@ -1,8 +1,8 @@
-import { Abilitie } from './abilitie';
-import { Language } from './language';
-import { Contact } from './contact';
-import { Experience } from './experience';
-import { Project } from './project';
+import { Abilitie } from './abilitie.model';
+import { Language } from './language.model';
+import { Contact } from './contact.model';
+import { Experience } from './experience.model';
+import { Project } from './project.model';
 
 export interface Employee {
   name: string;
@@ -13,6 +13,8 @@ export interface Employee {
   abilities: Array<Abilitie>;
   experience?: Array<Experience>;
   languages: Array<Language>;
+  city?: string;
   contacts: Array<Contact>;
   projects?: Array<Project>;
+  employeeID: string;
 }
