@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  userData: any;
+  private userData: any;
 
   constructor(
     public afs: AngularFirestore,
@@ -68,8 +68,12 @@ export class AuthService {
   }
 
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = this.getUserData;
     return (user !== null && user.emailVerified !== false) ? true : false;
+  }
+
+  get getUserData() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   googleAuth() {
@@ -100,7 +104,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
-    }
+    };
     return userRef.set(userData, {
       merge: true
     });

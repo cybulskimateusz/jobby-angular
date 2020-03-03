@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { RecruiterCrudService } from './recruiter-crud.service';
 import { JobCrudService } from './job-crud.service';
@@ -12,56 +13,43 @@ import { EmployerCrudService } from './employer-crud.service';
 })
 export class SelectProfileService {
 
-  isSelected = false;
-
   constructor(
     public recruiterCrudService: RecruiterCrudService,
     public jobCrudService: JobCrudService,
     public employerCrudService: EmployerCrudService,
-    public employeeCrudService: EmployeeCrudService
+    public employeeCrudService: EmployeeCrudService,
+    public router: Router
   ) { }
 
   selectEmployee() {
     const employee = this.employeeCrudService.readEmployee().get();
-    sessionStorage.setItem('employee', JSON.stringify(employee));
-    this.isSelected = true;
+    this.selectProfle('employee', employee);
   }
 
-  unselectEmployee() {
-    sessionStorage.removeItem('employee');
-    this.isSelected = false;
+  async selectEmployer() {
+    const employer = await this.employerCrudService.readEmployer();
+    this.selectProfle('employer', employer);
   }
 
-  selectEmployer() {
-    const employer = this.employerCrudService.employerData;
-    sessionStorage.setItem('employer', JSON.stringify(employer));
-    this.isSelected = true;
+  async selectJob(id: string) {
+    const job = await this.jobCrudService.readJobByID(id);
+    this.selectProfle('job', job);
   }
 
-  unselectEmployer() {
-    sessionStorage.removeItem('employer');
-    this.isSelected = false;
+  private selectProfle(profileType: string, json: any) {
+    const type = { type: profileType };
+    const profile = { ...json, ...type };
+    sessionStorage.setItem('profile', JSON.stringify(profile));
+    this.router.navigate(['dashboard']);
+
   }
 
-  selectJob(id: string) {
-    const job = this.jobCrudService.readJobsByRecruiterID().doc(id);
-    sessionStorage.setItem('job', JSON.stringify(job));
-    this.isSelected = true;
+  unselectProfile() {
+    sessionStorage.removeItem('profile');
+    this.router.navigate(['select-profile']);
   }
 
-  unselectJob() {
-    sessionStorage.removeItem('job');
-    this.isSelected = false;
-  }
-
-  selectRecruiter(id: string) {
-    const recruiter = this.recruiterCrudService.getMyRecruiterProfiles().doc(id);
-    sessionStorage.setItem('recruiter', JSON.stringify(recruiter));
-    this.isSelected = true;
-  }
-
-  unselectRecruiter() {
-    sessionStorage.removeItem('recruiter');
-    this.isSelected = false;
+  get getProfile() {
+    return sessionStorage.getItem('profile');
   }
 }

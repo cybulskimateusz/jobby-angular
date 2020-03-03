@@ -1,0 +1,7 @@
+<button (click)="getRecruiters()">Recruiter</button>
+
+<ul *ngIf="recruiters">
+  <li *ngFor="let recruiter of recruiters">
+    <app-select-job [recruiterID]="recruiter.id" [recruiterCompany]="recruiter.company"></app-select-job>
+  </li>
+</ul>

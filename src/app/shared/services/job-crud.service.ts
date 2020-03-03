@@ -19,9 +19,24 @@ export class JobCrudService {
     return this.afs.collection('jobs').add({ job });
   }
 
-  readJobsByRecruiterID() {
-    const recruiterJSON = JSON.parse(sessionStorage.getItem('recruiter'));
-    return this.afs.collection('jobs', ref => ref.where('recruiterID', '==', recruiterJSON.recruiterID));
+  async readJobsByRecruiterID(id: string) {
+    return this.afs.collection('jobs', ref => ref.where('recruiterID', '==', id))
+      .get().toPromise().then(res => res.docs.map(el => {
+        let job = {
+          id: el.id,
+          data: el.data()
+        };
+
+        return job;
+
+
+      }))
+  }
+
+  async readJobByID(id: string) {
+    const queriedData = await this.afs.collection('jobs').doc(id).get().toPromise();
+
+    return queriedData.data()
   }
 
   readJobsByOccupation(occupation: Occupation) {

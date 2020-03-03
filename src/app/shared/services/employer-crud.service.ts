@@ -10,34 +10,28 @@ import { Employer } from '../models/employer.model';
 })
 export class EmployerCrudService {
 
-  employerData: any;
   private employersCollection = this.afs.collection('employers');
+  employerReference = this.employersCollection.doc(this.authService.getUserData.uid);
 
   constructor(
     public afs: AngularFirestore,
     public authService: AuthService
   ) {
-    if (this.readEmployer()) {
-      this.employerData = this.readEmployer();
-    } else {
-      this.createEmployer();
-    }
   }
 
-  private createEmployer() {
-    return this.employersCollection.add(this.authService.userData.uid);
+  async readEmployer() {
+    return this.employersCollection.doc(this.authService.getUserData.uid).get().toPromise().then(res => {
+      return res.data();
+    })
+
   }
 
-  private readEmployer() {
-    return this.employersCollection.doc(this.authService.userData.uid).get();
-  }
-
-  updateEmployer(employer: Employer) {
-    return this.employersCollection.doc(this.authService.userData.uid).set(employer);
+  createEmployer(employer: Employer) {
+    return this.employersCollection.doc(this.authService.getUserData.uid).set(employer);
   }
 
   deleteEmployer() {
-    return this.employersCollection.doc(this.authService.userData.uid).delete();
+    return this.employersCollection.doc(this.authService.getUserData.uid).delete();
   }
 
 }

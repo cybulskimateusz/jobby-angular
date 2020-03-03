@@ -13,7 +13,7 @@ import { Recruiter } from '../models/recruiter.model';
 export class RecruiterCrudService {
 
   recruiters: any;
-  recruitersInEmployer = this.employerCrudService.employerData.collection('recruiters');
+  recruitersInEmployer = this.employerCrudService.employerReference.collection('recruiters');
   private recruitersCollection = this.afs.collection('recruiters');
 
   constructor(
@@ -28,6 +28,10 @@ export class RecruiterCrudService {
     return this.recruitersInEmployer.get();
   }
 
+  readRecruiterById(id: string) {
+    return this.recruitersCollection.doc(id).get().toPromise().then(res => res.data())
+  }
+
   createRecruiter(mail: string) {
     this.createRecruiterInRecruitersCollection(mail);
     this.createRecruiterInEmployer(mail);
@@ -40,15 +44,22 @@ export class RecruiterCrudService {
 
   private createRecruiterInEmployer(mail: string) {
     const recruiterID = this.recruiterID(mail);
-    return this.recruitersInEmployer.add(recruiterID);
+    return this.employerCrudService.employerReference.collection('recruiters').doc(recruiterID).set({});
   }
 
   readMyRecruiters() {
-    return this.afs.collection('recruiters', ref => ref.where('companyID', '==', this.authService.userData.uid)).get();
+    return this.afs.collection('recruiters', ref => ref.where('companyID', '==', this.authService.getUserData.uid)).get();
   }
 
-  getMyRecruiterProfiles() {
-    return this.afs.collection('recruiters', ref => ref.where('mail', '==', this.authService.userData.email));
+  async getMyRecruiterProfiles() {
+    return this.afs.collection('/recruiters', ref => ref.where('mail', '==', this.authService.getUserData.email))
+      .get().toPromise().then(res => res.docs.map(el => {
+        let company = {
+          id: el.id,
+          company: el.data().company
+        }
+        return company
+      }))
   }
 
   updateRecruiter(recruiter: Recruiter) {
@@ -71,8 +82,8 @@ export class RecruiterCrudService {
     return this.recruitersInEmployer.doc(recruiterID).delete();
   }
 
-  private recruiterID(mail: string) {
-    const uid = this.authService.userData.uid;
+  private recruiterID(mail: string): string {
+    const uid = this.authService.getUserData.uid;
     return uid + '_' + mail;
   }
 }

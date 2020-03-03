@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { AuthService } from '../services/auth.service';
+import { SelectProfileService } from '../services/select-profile.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SecureInnerPagesGuard implements CanActivate {
-
+export class SecureProfiledGuard implements CanActivate {
   constructor(
-    public authService: AuthService,
-    public router: Router
+    public router: Router,
+    public selectProfileService: SelectProfileService
   ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isLoggedIn) {
+
+    if (this.selectProfileService.getProfile) {
       this.router.navigate(['dashboard']);
     }
     return true;

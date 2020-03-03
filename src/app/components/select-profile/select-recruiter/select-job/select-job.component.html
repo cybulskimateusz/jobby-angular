@@ -1,0 +1,7 @@
+<button (click)="getJobs()">{{recruiterCompany}}</button>
+<ul>
+  <li *ngFor="let job of jobs">
+    <button (click)="selectProfileService.selectJob(job.id)">{{job.data.occupation}}</button>
+    <button (click)="removeJob(job.id)">Remove</button>
+  </li>
+</ul>

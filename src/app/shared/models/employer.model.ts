@@ -1,5 +1,5 @@
-import { Contact } from './contact';
-import { Project } from './project';
+import { Contact } from './contact.model';
+import { Project } from './project.model';
 
 export interface Employer {
   company: string;

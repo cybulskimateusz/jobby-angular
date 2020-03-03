@@ -14,6 +14,11 @@ import { AppRoutingModule } from './shared/routing/app-routing.module';
 import { AuthService } from './shared/services/auth.service';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { VerifyMailComponent } from './components/verify-mail/verify-mail.component';
+import { SelectProfileComponent } from './components/select-profile/select-profile.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { SelectRecruiterComponent } from './components/select-profile/select-recruiter/select-recruiter.component';
+import { SelectJobComponent } from './components/select-profile/select-recruiter/select-job/select-job.component';
+import { CreateJobComponent } from './components/select-profile/select-recruiter/select-job/create-job/create-job.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +27,18 @@ import { VerifyMailComponent } from './components/verify-mail/verify-mail.compon
     LoginComponent,
     DashboardComponent,
     ForgotPasswordComponent,
-    VerifyMailComponent
+    VerifyMailComponent,
+    SelectProfileComponent,
+    SelectRecruiterComponent,
+    SelectJobComponent,
+    CreateJobComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     AngularFireAuthModule
   ],
   providers: [AuthService],

@@ -29,7 +29,7 @@ export class EmployeeCrudService {
   }
 
   readEmployee() {
-    return this.afs.collection('employees', ref => ref.where('employeeID', '==', this.authService.userData.uid));
+    return this.afs.collection('employees', ref => ref.where('employeeID', '==', this.authService.getUserData.uid));
   }
 
   deleteEmployee() {
