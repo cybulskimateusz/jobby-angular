@@ -12,16 +12,14 @@ import { Recruiter } from '../models/recruiter.model';
 })
 export class RecruiterCrudService {
 
-  recruiters: any;
-  recruitersInEmployer = this.employerCrudService.employerReference.collection('recruiters');
+  private recruitersInEmployer = this.employerCrudService.employerReference.collection('recruiters');
   private recruitersCollection = this.afs.collection('recruiters');
 
   constructor(
-    public afs: AngularFirestore,
-    public authService: AuthService,
-    public employerCrudService: EmployerCrudService
+    private afs: AngularFirestore,
+    private authService: AuthService,
+    private employerCrudService: EmployerCrudService
   ) {
-    this.recruiters = this.readRecruiters();
   }
 
   private readRecruiters() {
@@ -52,14 +50,16 @@ export class RecruiterCrudService {
   }
 
   async getMyRecruiterProfiles() {
-    return this.afs.collection('/recruiters', ref => ref.where('mail', '==', this.authService.getUserData.email))
-      .get().toPromise().then(res => res.docs.map(el => {
-        let company = {
-          id: el.id,
-          company: el.data().company
-        }
-        return company
-      }))
+    const filtredCollection = this.afs.collection('recruiters', ref => ref.where('mail', '==', this.authService.getUserData.email))
+    const docsPromise = await filtredCollection.get().toPromise();
+    const myRecruiters = docsPromise.docs.map(el => {
+      const company = {
+        id: el.id,
+        employerID: el.data().employerID
+      };
+      return company;
+    });
+    return myRecruiters;
   }
 
   updateRecruiter(recruiter: Recruiter) {

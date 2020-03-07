@@ -10,12 +10,11 @@ import { Employee } from '../models/employee.model';
 })
 export class EmployeeCrudService {
 
-  employeeData: any;
-  employeesCollection = this.afs.collection('employees');
+  private employeesCollection = this.afs.collection('employees');
 
   constructor(
-    public afs: AngularFirestore,
-    public authService: AuthService
+    private afs: AngularFirestore,
+    private authService: AuthService
   ) {
   }
 

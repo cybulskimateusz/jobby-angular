@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RecruiterCrudService } from './recruiter-crud.service';
 import { JobCrudService } from './job-crud.service';
 import { EmployeeCrudService } from './employee-crud.service';
 import { EmployerCrudService } from './employer-crud.service';
@@ -14,11 +13,10 @@ import { EmployerCrudService } from './employer-crud.service';
 export class SelectProfileService {
 
   constructor(
-    public recruiterCrudService: RecruiterCrudService,
-    public jobCrudService: JobCrudService,
-    public employerCrudService: EmployerCrudService,
-    public employeeCrudService: EmployeeCrudService,
-    public router: Router
+    private jobCrudService: JobCrudService,
+    private employerCrudService: EmployerCrudService,
+    private employeeCrudService: EmployeeCrudService,
+    private router: Router
   ) { }
 
   selectEmployee() {

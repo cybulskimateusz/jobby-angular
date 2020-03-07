@@ -12,10 +12,10 @@ export class AuthService {
   private userData: any;
 
   constructor(
-    public afs: AngularFirestore,
-    public afAuth: AngularFireAuth,
-    public router: Router,
-    public ngZone: NgZone
+    private afs: AngularFirestore,
+    private afAuth: AngularFireAuth,
+    private router: Router,
+    private ngZone: NgZone
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {

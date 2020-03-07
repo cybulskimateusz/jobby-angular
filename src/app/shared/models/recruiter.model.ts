@@ -1,5 +1,5 @@
 export interface Recruiter {
   name?: string;
-  companyID: string;
+  employerID: string;
   mail: string;
 }

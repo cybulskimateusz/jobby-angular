@@ -14,18 +14,26 @@ export class EmployerCrudService {
   employerReference = this.employersCollection.doc(this.authService.getUserData.uid);
 
   constructor(
-    public afs: AngularFirestore,
-    public authService: AuthService
+    private afs: AngularFirestore,
+    private authService: AuthService
   ) {
   }
 
   async readEmployer() {
-    return this.employersCollection.doc(this.authService.getUserData.uid).get().toPromise().then(res => {
-      return res.data();
-    })
-
+    return this.readEmployerByID(this.authService.getUserData.uid);
   }
 
+  async readEmployerByID(id: string) {
+    const promise = await this.employersCollection.doc(id).get().toPromise();
+
+    const employer: Employer = {
+      name: promise.data().name,
+      contacts: promise.data().contacts,
+      projects: promise.data().projects
+    };
+
+    return employer;
+  }
   createEmployer(employer: Employer) {
     return this.employersCollection.doc(this.authService.getUserData.uid).set(employer);
   }

@@ -8,7 +8,7 @@ export interface Job {
   salary: number;
   description: string;
   recruiterID: string;
-  companyID: string;
+  employerID: string;
   city?: string;
   abilities?: Array<Abilitie>;
   languages?: Array<Language>;

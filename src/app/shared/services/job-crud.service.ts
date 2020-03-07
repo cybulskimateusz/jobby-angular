@@ -11,8 +11,8 @@ import { Occupation } from '../models/occupation.model';
 export class JobCrudService {
 
   constructor(
-    public afs: AngularFirestore,
-    public authService: AuthService
+    private afs: AngularFirestore,
+    private authService: AuthService
   ) { }
 
   createJob(job: Job) {
@@ -20,17 +20,16 @@ export class JobCrudService {
   }
 
   async readJobsByRecruiterID(id: string) {
-    return this.afs.collection('jobs', ref => ref.where('recruiterID', '==', id))
-      .get().toPromise().then(res => res.docs.map(el => {
-        let job = {
-          id: el.id,
-          data: el.data()
-        };
-
-        return job;
-
-
-      }))
+    const filtredCollection = this.afs.collection('jobs', ref => ref.where('recruiterID', '==', id))
+    const docsPromise = await filtredCollection.get().toPromise();
+    const jobs = docsPromise.docs.map(el => {
+      const job = {
+        id: el.id,
+        data: el.data()
+      };
+      return job;
+    });
+    return jobs;
   }
 
   async readJobByID(id: string) {

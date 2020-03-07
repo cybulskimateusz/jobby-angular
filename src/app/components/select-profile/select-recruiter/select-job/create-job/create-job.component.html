@@ -1,1 +1,16 @@
-<p>create-job works!</p>
+<button (click)="isOpen = !isOpen"> Create new job </button>
+
+<form [formGroup]="createJobForm" (ngSubmit)="createJob()" *ngIf="isOpen">
+  <select formControlName="occupation" name="occupation" id="occupation"
+    (change)="setOccupationIfExist($event.target.value)" required>
+    <option *ngFor="let occupation of occupationOptions" [value]="occupation">{{occupation}}</option>
+  </select>
+  <input type="range" min="0" max="2000000" formControlName="salary" required />
+  <input formControlName="description" required />
+  <input formControlName="city" required />
+  <input formControlName="abilities" />
+  <input formControlName="languages" />
+  <button type="submit">
+    Save
+  </button>
+</form>
