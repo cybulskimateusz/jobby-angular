@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthService } from '../services/auth.service';
-import { Employee } from '../models/employee.model';
+import { Employee } from '../models/employee';
 
 
 @Injectable({

@@ -2,8 +2,8 @@ import { Injectable, Query } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthService } from '../services/auth.service';
-import { Job } from '../models/job.model';
-import { Occupation } from '../models/occupation.model';
+import { Job } from '../models/job';
+import { Occupation } from '../models/occupation.enum';
 
 @Injectable({
   providedIn: 'root'

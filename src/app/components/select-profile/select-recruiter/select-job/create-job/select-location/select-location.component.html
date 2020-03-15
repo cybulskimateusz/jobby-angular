@@ -1,0 +1,12 @@
+<input (input)="setfiltredPlaces($event)" />
+<ul>
+  <li *ngFor="let place of placesFound">
+    <input
+      type="radio"
+      name="place"
+      value="{{ place }}"
+      (change)="setAddress(place)"
+    />
+    <label for="{{ place.place_name }}">{{ place.place_name }}</label>
+  </li>
+</ul>

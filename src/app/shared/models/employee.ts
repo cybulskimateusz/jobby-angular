@@ -1,8 +1,8 @@
-import { Abilitie } from './abilitie.model';
-import { Language } from './language.model';
-import { Contact } from './contact.model';
-import { Experience } from './experience.model';
-import { Project } from './project.model';
+import { Abilitie } from './abilitie';
+import { Contact } from './contact';
+import { Experience } from './experience';
+import { Project } from './project';
+import { LanguageWithLevel } from './language-with-level';
 
 export interface Employee {
   name: string;
@@ -12,7 +12,7 @@ export interface Employee {
   born: Date;
   abilities: Array<Abilitie>;
   experience?: Array<Experience>;
-  languages: Array<Language>;
+  languages: Array<LanguageWithLevel>;
   city?: string;
   contacts: Array<Contact>;
   projects?: Array<Project>;

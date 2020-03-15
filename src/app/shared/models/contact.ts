@@ -1,3 +1,8 @@
+export interface Contact {
+  contactWay: ContactWay;
+  link: string;
+}
+
 export enum ContactWay {
   facebook = 'facebook',
   twitter = 'twitter',
@@ -8,9 +13,4 @@ export enum ContactWay {
   phone = 'phone',
   mail = 'mail',
   website = 'website'
-}
-
-export interface Contact {
-  contactWay: ContactWay;
-  link: string;
 }

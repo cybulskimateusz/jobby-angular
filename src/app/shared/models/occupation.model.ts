@@ -1,6 +1,0 @@
-export enum Occupation {
-  FRONTEND_DEVELOPER,
-  BACKEND_DEVELOPER,
-  STOMATOLOGIST,
-  TRUCK_DRIVER
-}

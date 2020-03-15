@@ -1,7 +1,6 @@
-import { Abilitie } from './abilitie.model';
-import { Language } from './language.model';
-
-import { Occupation } from './occupation.model';
+import { Abilitie } from './abilitie';
+import { Occupation } from './occupation.enum';
+import { LanguageWithLevel } from './language-with-level';
 
 export interface Job {
   occupation: Occupation;
@@ -11,5 +10,5 @@ export interface Job {
   employerID: string;
   city?: string;
   abilities?: Array<Abilitie>;
-  languages?: Array<Language>;
+  languages?: Array<LanguageWithLevel>;
 }

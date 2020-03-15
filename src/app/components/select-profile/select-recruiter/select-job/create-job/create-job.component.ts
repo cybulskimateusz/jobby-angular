@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
-import { Job } from '../../../../../shared/models/job.model';
-import { Occupation } from 'src/app/shared/models/occupation.model';
+import { Job } from '../../../../../shared/models/job';
+import { Occupation } from 'src/app/shared/models/occupation.enum';
 import { EmployerCrudService } from 'src/app/shared/services/employer-crud.service';
 import { JobCrudService } from 'src/app/shared/services/job-crud.service';
+import { Address } from 'src/app/shared/models/address';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-create-job',
@@ -21,6 +23,7 @@ export class CreateJobComponent implements OnInit {
   occupationOptions: string[];
   selectedOccupation: Occupation;
   createJobForm: FormGroup;
+  address: Address;
 
   constructor(
     private employerCrudService: EmployerCrudService,
@@ -36,12 +39,20 @@ export class CreateJobComponent implements OnInit {
       description: ['', Validators.required],
       recruiterID: [this.recruiterID],
       employerID: [this.employerID],
-      city: [''],
+      location: [{}],
       abilities: [''],
       languages: ['']
     });
 
     this.occupationOptions = Object.keys(this.Occupation);
+  }
+
+  setLocationField(value: string) {
+    this.setFormField('location', JSON.parse(value));
+  }
+
+  setFormField(field: string, value: any) {
+    this.createJobForm.controls[field].setValue(value);
   }
 
   createJob() {

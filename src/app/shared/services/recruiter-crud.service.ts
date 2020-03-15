@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 import { AuthService } from '../services/auth.service';
 import { EmployerCrudService } from '../services/employer-crud.service';
-import { Recruiter } from '../models/recruiter.model';
+import { Recruiter } from '../models/recruiter';
 
 
 

@@ -19,6 +19,7 @@ import { SelectProfileComponent } from './components/select-profile/select-profi
 import { SelectRecruiterComponent } from './components/select-profile/select-recruiter/select-recruiter.component';
 import { SelectJobComponent } from './components/select-profile/select-recruiter/select-job/select-job.component';
 import { CreateJobComponent } from './components/select-profile/select-recruiter/select-job/create-job/create-job.component';
+import { SelectLocationComponent } from './components/select-profile/select-recruiter/select-job/create-job/select-location/select-location.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CreateJobComponent } from './components/select-profile/select-recruiter
     SelectProfileComponent,
     SelectRecruiterComponent,
     SelectJobComponent,
-    CreateJobComponent
+    CreateJobComponent,
+    SelectLocationComponent
   ],
   imports: [
     BrowserModule,
