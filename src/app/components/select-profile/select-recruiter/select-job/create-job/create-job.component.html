@@ -1,17 +1,9 @@
 <button (click)="isOpen = !isOpen">Create new job</button>
 
 <form [formGroup]="createJobForm" (ngSubmit)="createJob()" *ngIf="isOpen">
-  <select
-    formControlName="occupation"
-    name="occupation"
-    id="occupation"
-    (change)="setOccupationIfExist($event.target.value)"
-    required
-  >
-    <option *ngFor="let occupation of occupationOptions" [value]="occupation">{{
-      occupation
-    }}</option>
-  </select>
+  <app-select-occupation
+    (valueChange)="setFormField('occupation', $event)"
+  ></app-select-occupation>
   <input type="range" min="0" max="2000000" formControlName="salary" required />
   <textarea formControlName="description" required></textarea>
   <app-select-location

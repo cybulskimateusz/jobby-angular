@@ -20,6 +20,7 @@ import { SelectRecruiterComponent } from './components/select-profile/select-rec
 import { SelectJobComponent } from './components/select-profile/select-recruiter/select-job/select-job.component';
 import { CreateJobComponent } from './components/select-profile/select-recruiter/select-job/create-job/create-job.component';
 import { SelectLocationComponent } from './components/select-profile/select-recruiter/select-job/create-job/select-location/select-location.component';
+import { SelectOccupationComponent } from './components/select-profile/select-recruiter/select-job/create-job/select-occupation/select-occupation.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { SelectLocationComponent } from './components/select-profile/select-recr
     SelectRecruiterComponent,
     SelectJobComponent,
     CreateJobComponent,
-    SelectLocationComponent
+    SelectLocationComponent,
+    SelectOccupationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<select
+  name="occupation"
+  id="occupation"
+  (change)="setOccupationIfExist($event.target.value)"
+>
+  <option *ngFor="let occupation of occupationOptions" [value]="occupation">{{
+    occupation
+  }}</option>
+</select>
